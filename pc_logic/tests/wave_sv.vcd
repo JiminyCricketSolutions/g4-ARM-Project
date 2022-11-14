@@ -1,0 +1,30 @@
+$date
+	Mon Nov 14 12:28:39 2022
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module pc_logic $end
+$var wire 4 ! rd [3:0] $end
+$upscope $end
+$scope module pc_logic $end
+$var wire 1 " branch $end
+$upscope $end
+$scope module pc_logic $end
+$var wire 1 # regw $end
+$upscope $end
+$scope module pc_logic $end
+$var reg 1 $ pcs $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+x$
+z#
+z"
+bz !
+$end
+#1
