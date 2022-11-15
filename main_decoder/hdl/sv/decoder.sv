@@ -13,8 +13,8 @@ module decoder (
   logic       Branch, ALUOp;
 
   // Main Decoder
-  	always @*		// In the book this is an always_comb
-		case(Op)	// In the book this is a 'casex'
+  	always //_comb		// In the book this is an always_comb
+		casex(Op)	// In the book this is a 'casex'
 								//Data-processing immediate
 			2'b00: 	if (Funct[5])	controls = 10'b0000101001;
 								// Data-Processing Register
@@ -24,7 +24,7 @@ module decoder (
 								// STR
 					else			controls = 10'b1001110100;
 								// B
-			2'b10 					controls = 10'b0110100010;
+			2'b10: 					controls = 10'b0110100010;
 								// Unimplemented
 			default:				controls = 10'bx;
 		endcase
