@@ -13,7 +13,7 @@ module decoder (
   logic       Branch, ALUOp;
 
   // Main Decoder
-  	always //_comb		// In the book this is an always_comb
+  	always_comb		// In the book this is an always_comb
 		casex(Op)	// In the book this is a 'casex'
 								//Data-processing immediate
 			2'b00: 	if (Funct[5])	controls = 10'b0000101001;
