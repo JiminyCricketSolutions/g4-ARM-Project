@@ -1,18 +1,19 @@
 from model import model
-
 import cocotb
-from cocotb.triggers import Timer
+from cocotb.triggers import FallingEdge
+from cocotb.clock import Clock
 
 @cocotb.test()
-async def test4_33(dut):
+async def flopr(dut):
+    clock = Clock(dut.clk, 10, units="us")
+    cocotb.start_soon(clock.start())
 
-    for aVal in range(2**4):
-        for bVal in range(2**4):
-            dut.a.value = aVal
-            dut.b.value = bVal
-            await Timer(1, units="ns")
-            hdlResult = int(dut.y.value)
-            modelResult = model(a=dut.a.value, b=dut.b.value).integer
-            assert hdlResult == modelResult, \
-                f"HDL and model disagree: {hdlResult} vs {modelResult}"
-
+    count = 0
+    await FallingEdge(dut.clk)
+    for val in range(2**4):
+        for reset in range(2):
+            dut.d.value = val
+            dut.reset.value = reset
+            await FallingEdge(dut.clk)
+            assert dut.q.value == (val if not reset else 0), f"output q was incorrect on {count} cycle"
+            count += 1
