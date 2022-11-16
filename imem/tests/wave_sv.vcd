@@ -1,0 +1,22 @@
+$date
+	Wed Nov 16 08:38:45 2022
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module imem $end
+$var wire 32 ! a [31:0] $end
+$upscope $end
+$scope module imem $end
+$var wire 32 " rd [31:0] $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx "
+bz !
+$end
+#1
