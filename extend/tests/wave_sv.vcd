@@ -1,0 +1,26 @@
+$date
+	Tue Nov 15 18:35:29 2022
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module extend $end
+$var wire 24 ! Instr [23:0] $end
+$upscope $end
+$scope module extend $end
+$var wire 2 " ImmSrc [1:0] $end
+$upscope $end
+$scope module extend $end
+$var reg 8 # ExtImm [7:0] $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx #
+bz "
+bz !
+$end
+#1
