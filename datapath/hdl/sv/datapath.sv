@@ -1,4 +1,4 @@
-module unsignedmult (
+module datapath (
   input logic           clk, reset,
   input logic   [1:0]   RegSrc,
   input logic           RegWrite,
@@ -30,7 +30,7 @@ module unsignedmult (
   // register file Logic
   mux2 #(4) ra1mux(Instr[19:16], 4'b1111, RegSrc[0], RA1);
   mux2 #(4) ra2mux(Instr[3:0], Instr[15:12], RegSrc[1], RA2);
-  regfile rf(clk, RegWrite, RA1, RA2,
+  registerfile rf(clk, RegWrite, RA1, RA2,
             Instr[15:12], Result, PCPlus8,
             SrcA, WriteData);
   mux2 #(32) resmux(ALUResult, ReadData, MemtoReg, Result);
