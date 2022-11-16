@@ -1,0 +1,3 @@
+adder
+mux2
+flopr
