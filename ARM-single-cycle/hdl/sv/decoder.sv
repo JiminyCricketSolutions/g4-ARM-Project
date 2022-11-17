@@ -1,0 +1,1 @@
+../../../main_decoder/hdl/sv/decoder.sv
