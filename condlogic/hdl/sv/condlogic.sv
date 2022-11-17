@@ -3,7 +3,7 @@ module condlogic (
 	input logic [3:0] Cond,
 	input logic [3:0] ALUFlags,
 	input logic [1:0] FlagW,
-	input logic 	  PCs, RegW, MemW, 
+	input logic 	  PCS, RegW, MemW, 
 	output logic 	  PCSrc, RegWrite, MemWrite
 );
 
@@ -20,10 +20,10 @@ module condlogic (
 
 	// write controls are conditional
 	condcheck cc(Cond, Flags, CondEx);
-	assign FlagWrite = FlagW & {2{CondEx}};
-	assign RegWrite = RegW & CondEx;
-	assign MemWrite = MemW & CondEx;
-	assign PCSrc = PCS & CondEx;
+	assign FlagWrite 	= FlagW & {2{CondEx}};
+	assign RegWrite 	= RegW & CondEx;
+	assign MemWrite 	= MemW & CondEx;
+	assign PCSrc 		= PCS & CondEx;
 
 
   // so cocotb will output the wave file in the tests directory
@@ -37,7 +37,7 @@ module condlogic (
         Cond,
         ALUFlags,
 		FlagW,
-		PCs,
+		PCS,
 		RegW,
 		MemW,
 		PCSrc,

@@ -59,7 +59,7 @@ Dr. Wise
 adder, mux2, flopr, registerFile, ram,
 
 # Testing incomplete Modules
-
+condcheck, decoder, flopenr, condlogic
 
 # Not Compiling / Dependencies untested or incomplete
-decoder, ARMSCtop, ARMSC, 
+ARMSCtop, ARMSC, 
