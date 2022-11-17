@@ -53,13 +53,12 @@ Dr. Wise
 ##	Group 4 Notes
 ##
 
-# As This is a new section it is not yet comprehensive. Add and remove where appropriate.
+# Add and remove where appropriate.
 
 # Fully Tested Modules
-adder, mux2, flopr, registerFile, ram,
+adder, mux2, flopr, ram, alu, 
 
 # Testing incomplete Modules
-condcheck, decoder, flopenr, condlogic, ARMSCtop, ARMSC, alu, controller,  
+ARMSCtop, ARMSC, condcheck, condlogic, controller, datapath, dmem, extender, flopenr, imem, decoder, regfile, registerfile  
 
-# Not Compiling / Dependencies untested or incomplete
 

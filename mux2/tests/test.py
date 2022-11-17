@@ -4,7 +4,7 @@ import cocotb
 from cocotb.triggers import Timer
 from cocotb.types import LogicArray, Logic, Range
 @cocotb.test()
-async def test4_33(dut):
+async def testMuxtwo(dut):
     aVals = [LogicArray(x, Range(8-1, 'downto', 0)) for x in range(0, 2**8)]
     bVals = [LogicArray(x, Range(8-1, 'downto', 0)) for x in range(0, 2**8)]
     sel =  [0, 1]
