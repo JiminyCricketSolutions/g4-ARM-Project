@@ -56,7 +56,7 @@ Dr. Wise
 # Add and remove where appropriate.
 
 # Fully Tested Modules
-adder, mux2, flopr, ram, alu, condcheck
+adder, mux2, flopr, ram, alu, condcheck, flopenr
 
 # Testing incomplete Modules
 ARMSCtop, ARMSC, condcheck, condlogic, controller, datapath, dmem, extender, flopenr, imem, decoder, regfile, registerfile  
