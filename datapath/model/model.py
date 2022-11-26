@@ -1,8 +1,8 @@
-from mux import model as mux
+from mux2 import model as mux
 from flopr import model as flopr
 from registerfile import registerfile as regfile
 from adder import model as adder
-from alu import model as alu
+from alu import alu as alu
 from extender import model as extender
 
 from cocotb.types import Logic, LogicArray, Range
@@ -28,7 +28,7 @@ def model(RegSrc: LogicArray, RegWrite: Logic, ImmSrc: LogicArray, ALUSrc: Logic
     #register file logic
     RA1 = mux(Instr[19:16], LogicArray('1111'), RegSrc[0])
     RA2 = mux(Instr[3:0], Instr[15:12], RegSrc[1])
-    WriteData = regfile.write(RegWrite, RA1
+    WriteData = regfile.write(RegWrite, RA1)
 
 
     Result = mux(ALUResult, ReadData, MemtoReg)
