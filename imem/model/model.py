@@ -1,5 +1,8 @@
 from cocotb.types import Logic, LogicArray, Range
 
-def model(a: LogicArray, b: LogicArray) -> LogicArray:
-    """ model for 4_33 unsigned multiplier """
-    return LogicArray(a.integer * b.integer)
+class ram:
+    """model for imem """
+    def __init__(self):
+        self.data = (64) * [LogicArray(0, Range(31, 'downto', 0))]
+    def read(self, a: LogicArray) -> LogicArray:
+        return self.data[a[7:2].integer]

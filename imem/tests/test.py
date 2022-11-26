@@ -1,18 +1,26 @@
-from model import model
+import model
 
+import cocotb
+from cocotb.clock import Clock
+from cocotb.triggers import Timer
+from cocotb.triggers import FallingEdge
+from cocotb.types import Logic, LogicArray, Range
 import cocotb
 from cocotb.triggers import Timer
 
 @cocotb.test()
 async def testImem(dut):
+    zero = LogicArray(0, Range(31, 'downto', 0))
 
-    for aVal in range(2**4):
-        for bVal in range(2**4):
-            dut.a.value = aVal
-            dut.b.value = bVal
-            await Timer(1, units="ns")
-            hdlResult = int(dut.y.value)
-            modelResult = model(a=dut.a.value, b=dut.b.value).integer
-            assert hdlResult == modelResult, \
-                f"HDL and model disagree: {hdlResult} vs {modelResult}"
+    ram = model.ram()
 
+
+    for idx in range(64): 
+        addressToRead = LogicArray(idx, Range(31, 'downto', 0))
+        dut.a.value = addressToRead
+        print("Read addr:", addressToRead)
+        await Timer(1, units="ns")
+        readValue = LogicArray(dut.rd.value, Range(31, 'downto', 0))
+        refReadValue = ram.read(addressToRead)
+        print(readValue, refReadValue)
+#        assert readValue == refReadValue, 'ERROR: {readValue} vs {refReadValue}'

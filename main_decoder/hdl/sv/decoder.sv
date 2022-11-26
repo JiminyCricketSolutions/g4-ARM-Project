@@ -26,7 +26,7 @@ module decoder (
 								// B
 			2'b10: 					controls = 10'b0110100010;
 								// Unimplemented
-			default:				controls = 10'bx;
+			default:				controls = 10'b0000000000;
 		endcase
 
 	assign 	{RegSrc, ImmSrc, ALUSrc, MemtoReg,
@@ -40,7 +40,7 @@ module decoder (
 				4'b0010: ALUControl = 2'b01; // SUB
 				4'b0000: ALUControl = 2'b10; // AND
 				4'b1100: ALUControl = 2'b11; // ORR
-				default: ALUControl = 2'bx;	 // unimplemented
+				default: ALUControl = 2'b10;	 // unimplemented
 			endcase
 
 		// update flags if S bit is set (C & V only for arith) 

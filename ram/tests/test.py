@@ -43,5 +43,6 @@ async def testRAM(dut):
         await Timer(1, units="ns")
         readValue = LogicArray(dut.rd.value, Range(31, 'downto', 0))
         refReadValue = ram.read(addressToRead)
+#        print(readValue, refReadValue)
         assert readValue == refReadValue, 'ERROR: {readValue} vs {refReadValue}'
 
