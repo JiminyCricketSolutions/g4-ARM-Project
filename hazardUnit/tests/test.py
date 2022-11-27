@@ -4,7 +4,7 @@ import cocotb
 from cocotb.triggers import Timer
 
 @cocotb.test()
-async def testSKELETON(dut):
+async def testHazardUnit(dut):
 
     for aVal in range(2**4):
         for bVal in range(2**4):
