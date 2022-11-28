@@ -1,11 +1,11 @@
-from model import model
+from model import hazardUnit as model
 
 import cocotb
 from cocotb.triggers import Timer
 
 @cocotb.test()
 async def testHazardUnit(dut):
-
+    
     for aVal in range(2**4):
         for bVal in range(2**4):
             dut.a.value = aVal
@@ -15,4 +15,7 @@ async def testHazardUnit(dut):
             modelResult = model(a=dut.a.value, b=dut.b.value).integer
             assert hdlResult == modelResult, \
                 f"HDL and model disagree: {hdlResult} vs {modelResult}"
+
+
+
 
