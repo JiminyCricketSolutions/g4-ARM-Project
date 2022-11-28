@@ -49,8 +49,8 @@ async def test_registerfile(dut):
     await FallingEdge(dut.clk)
 
     for idx in range(16):
-        dut.ra1.value = LogicArray(idx, Range(31, 'downto', 0))
-        dut.ra2.value = LogicArray(idx, Range(31, 'downto', 0))
+        dut.ra1.value = LogicArray(idx, Range(3, 'downto', 0))
+        dut.ra2.value = LogicArray(idx, Range(3, 'downto', 0))
         
         await FallingEdge(dut.clk)
 
