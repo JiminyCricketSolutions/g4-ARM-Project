@@ -29,7 +29,7 @@ def model(RegSrc: LogicArray, RegWrite: Logic, ImmSrc: LogicArray, ALUSrc: Logic
     RA1 = mux(Instr[19:16], LogicArray('1111'), RegSrc[0])
     RA2 = mux(Instr[3:0], Instr[15:12], RegSrc[1])
     WriteData = regfile.write(RegWrite, RA1)
-
+    SrcA = regfile.read(RA1, PCPlus8)
 
     Result = mux(ALUResult, ReadData, MemtoReg)
     ExtImm = extender(Instr[23:0], ImmSrc)
