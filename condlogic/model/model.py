@@ -8,18 +8,16 @@ class condlogic:
         self.Flags = LogicArray('0000')
         self.CondEx = 0
 
-    def flopenr(self, reset: Logic, ALUFlags: LogicArray, FlagW: LogicArray):
+    def flopenr(self, reset, ALUFlags, FlagW):
         if (bool(reset)):
             self.Flags = LogicArray('0000')
             return
         else:
-            if (FlagW[1] == 1 and self.CondEx == 1):
-                self.Flags[3:2] = LogicArray(ALUFlags[3:2])
+            if (FlagW[1] and self.CondEx):
+                self.Flags[3:2] = (ALUFlags[3:2])
 
-            if (FlagW[1] == 1 and self.CondEx == 1):
-                self.Flags[1:0] = LogicArray(ALUFlags[1:0])
-
-            print(f"Model Flags: {self.Flags}")
+            if (FlagW[0] and self.CondEx):
+                self.Flags[1:0] = (ALUFlags[1:0])
             return
 
     def set(self, Cond: LogicArray, ALUFlags: LogicArray, FlagW: LogicArray, PCS: Logic, RegW: Logic, MemW: Logic):
@@ -30,8 +28,6 @@ class condlogic:
         except:
             print(f"With Except Model CondEx: {condcheck(Cond, self.Flags)}")
             self.CondEx = int(condcheck(Cond, self.Flags).integer)
-#        self.FlagWrite[1] = (FlagW[1]) & CondEx
-#        self.FlagWrite[0] = (FlagW[0]) & CondEx
         RegWrite = int(RegW and self.CondEx)
         MemWrite = int(MemW and self.CondEx)
         PCSrc = int(PCS and self.CondEx)

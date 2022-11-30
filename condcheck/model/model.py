@@ -12,19 +12,14 @@ def model(Cond: LogicArray, Flags: LogicArray):
     ge = int((neg == overflow))
 #    Cond = Cond.integer
 
-
     if (Cond == LogicArray('0000').integer):
-        print(f"Cond = {Cond}; Flags: {Flags}; Value returned: zero - {int(zero)}")
-        return int(zero)
+        return int(zero) #
     elif (Cond == LogicArray('0001').integer):
-        print(f"Cond = {Cond}; Flags: {Flags}; Value returned: ~zero - {int(not(zero))}")
-        return int(not(zero))
+        return int(not(zero)) #
     elif (Cond == LogicArray('0010').integer):
-        # print(f"Cond = {Cond}; Value returned: zero - {int(zero)}")
-        return carry
+        return carry #
     elif (Cond == LogicArray('0011').integer):
-        # print(f"Cond = {Cond}; Value returned: zero - {int(zero)}")
-        return int(not(carry))
+        return int(not(carry)) #
     elif (Cond == LogicArray('0100').integer):
         # print(f"Cond = {Cond}; Value returned: zero - {int(zero)}")
         return neg
