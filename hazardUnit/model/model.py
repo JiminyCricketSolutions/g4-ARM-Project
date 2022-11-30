@@ -21,28 +21,28 @@ def hazardUnit(RA1D:LogicArray, RA2D:LogicArray, RA1E:LogicArray, RA2E:LogicArra
 
     # // Checks to see if the matching registers matters (i.e., if the registers are not getting written to, don't worry about hazards)
     if (Match_1E_M & RegWriteM):
-        resultsDict["ForwardAE"] = LogicArray("10") # SrcAE = ALUOutM
+        resultsDict["ForwardAE"] = LogicArray("10").integer # SrcAE = ALUOutM
     elif (Match_1E_W & RegWriteW):
-        resultsDict["ForwardAE"] = LogicArray("01") # SrcAE = ResultW
+        resultsDict["ForwardAE"] = LogicArray("01").integer # SrcAE = ResultW
     else:
-        resultsDict["ForwardAE"] = LogicArray("00") # SrcAE from Regfile
+        resultsDict["ForwardAE"] = LogicArray("00").integer # SrcAE from Regfile
 
     if (Match_2E_M & RegWriteM):  
-        resultsDict["ForwardBE"] = LogicArray("10")
+        resultsDict["ForwardBE"] = LogicArray("10").integer
     elif (Match_2E_W & RegWriteW):
-        resultsDict["ForwardBE"] = LogicArray("01")
+        resultsDict["ForwardBE"] = LogicArray("01").integer
     else: 
-        resultsDict["ForwardBE"] =LogicArray("00")
+        resultsDict["ForwardBE"] =LogicArray("00").integer
 
     # LDR Stalling AND Branch Hazards
     Match_12D_E = (RA1D == WA3E) or (RA2D == WA3E)
-    LDRStall = Match_12D_E and MemtoRegE
-    PCWrPendingF = PCSrcD or PCSrcE or PCSrcM
+    LDRStall = (Match_12D_E and MemtoRegE)
+    PCWrPendingF = (PCSrcD or PCSrcE or PCSrcM)
     
-    resultsDict["StallD"] = LDRStall
-    resultsDict["StallF"] = LDRStall or PCWrPendingF
-    resultsDict["FlushE"] = LDRStall or BranchTakenE
-    resultsDict["FlushD"] = PCWrPendingF or PCSrcW or BranchTakenE
+    resultsDict["StallD"] = int(LDRStall)
+    resultsDict["StallF"] = int(LDRStall or PCWrPendingF)
+    resultsDict["FlushE"] = int(LDRStall or BranchTakenE)
+    resultsDict["FlushD"] = int(PCWrPendingF or PCSrcW or BranchTakenE)
 
 
 
