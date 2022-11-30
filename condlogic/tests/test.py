@@ -52,4 +52,6 @@ async def testCondlogic(dut):
                             modelResult = CondlogicModel.set(Cond, ALUFlags, FlagW, PCS, RegW, MemW)
 
                             await FallingEdge(dut.clk)
+                            print(f"MemW: {MemW}\nRegW: {RegW}\nPCS: {PCS}\nFlagW: {FlagW}\nALUFlags: {ALUFlags}\nCond: {Cond}\n")
+                            print(f"SV: PCS: {dut.PCS.value} CondEx : {dut.CondEx.value} Flags : {dut.Flags.value}")
                             assert dut.PCSrc.value == modelResult["PCSrc"], f"HDL and model result disagree: {dut.PCSrc.value} vs {modelResult['PCSrc']}"
