@@ -44,16 +44,12 @@ async def testCondlogic(dut):
                             dut.FlagW.value = FlagW
                             dut.ALUFlags.value = ALUFlags
                             dut.Cond.value = Cond
-                            print(Cond, ALUFlags, FlagW, PCS, RegW, MemW)
+
                             CondlogicModel.flopenr(0, LogicArray(ALUFlags, Range(3, 'downto', 0)), LogicArray(FlagW, Range(3, 'downto', 0)))
                             modelResult = CondlogicModel.set(Cond, ALUFlags, FlagW, PCS, RegW, MemW)
 
                             await FallingEdge(dut.clk)
-<<<<<<< HEAD
+
                             assert dut.RegWrite.value == modelResult["RegWrite"], f"HDL and model result disagree: {dut.PCSrc.value} vs {modelResult['PCSrc']}"
                             assert dut.MemWrite.value == modelResult["MemWrite"], f"HDL and model result disagree: {dut.PCSrc.value} vs {modelResult['PCSrc']}"
-=======
-                            print(f"MemW: {MemW}\nRegW: {RegW}\nPCS: {PCS}\nFlagW: {FlagW}\nALUFlags: {ALUFlags}\nCond: {Cond}\n")
-                            print(f"SV: PCS: {dut.PCS.value} CondEx : {dut.CondEx.value} Flags : {dut.Flags.value}")
->>>>>>> refs/remotes/origin/main
                             assert dut.PCSrc.value == modelResult["PCSrc"], f"HDL and model result disagree: {dut.PCSrc.value} vs {modelResult['PCSrc']}"

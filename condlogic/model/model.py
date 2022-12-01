@@ -21,17 +21,13 @@ class condlogic:
             return
 
     def set(self, Cond: LogicArray, ALUFlags: LogicArray, FlagW: LogicArray, PCS: Logic, RegW: Logic, MemW: Logic):
-        print(f"Model Cond Array: {Cond}")
         try:
-            print(f"Without Except Model CondEx: {condcheck(Cond, self.Flags)}")
             self.CondEx = condcheck(Cond, self.Flags)
         except:
-            print(f"With Except Model CondEx: {condcheck(Cond, self.Flags)}")
             self.CondEx = int(condcheck(Cond, self.Flags).integer)
         RegWrite = int(RegW and self.CondEx)
         MemWrite = int(MemW and self.CondEx)
         PCSrc = int(PCS and self.CondEx)
-        print(f"PCS: {PCS}; condEx: {self.CondEx}; PCSrc of Model: {PCSrc}")
         return {"RegWrite": RegWrite,
             "MemWrite": MemWrite,
             "PCSrc": PCSrc}

@@ -51,7 +51,6 @@ def model(Cond: LogicArray, Flags: LogicArray):
         # print(f"Cond = {Cond}; Value returned: zero - {int(zero)}")
         return int(not(not(zero) and ge))
     elif (Cond == LogicArray('1110').integer):
-        # print(f"Cond = {Cond}; Value returned: zero - {int(zero)}")
         return 1
     else:
         return 0
