@@ -23,14 +23,17 @@ class program:
 
 
     def __init__(self, MachineCodeFileName):
-        self.program = open(MachineCodeFileName, 'r').readlines()    # Opens file in Text Mode 
-                                                 # to change to binary mode,
-                                                 # Set 'r' to 'r+b'
+        file = open(MachineCodeFileName, 'r')   # Opens file in Text Mode
+        self.program = file.readlines()         # to change to binary mode,
+        file.close()                            # Set 'r' to 'r+b'
+                                                
         self.programLength = len(self.program)
         # print(f"Program Length is {self.programLength}")
         self.programLine = 0
 
         self._updateFlags()
+
+        
 
     def getNextInstruction(self):
         
