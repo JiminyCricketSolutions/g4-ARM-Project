@@ -18,6 +18,6 @@ async def testARMSC(dut):
     #         await Timer(1, units="ns")
     #         hdlResult = int(dut.y.value)
     #         modelResult = model(a=dut.a.value, b=dut.b.value).integer
-    #         assert hdlResult == modelResult, \
-    #             f"HDL and model disagree: {hdlResult} vs {modelResult}"
+            assert False, "Testing Very Incomplete" #\
+                #f"HDL and model disagree: {hdlResult} vs {modelResult}"
 
