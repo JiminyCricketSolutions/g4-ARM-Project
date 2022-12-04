@@ -1,1 +1,1 @@
-ARMSource/ARMMEMLOADER.py
+../../ARM-single-cycle/tests/ARMMEMLOADER.py
