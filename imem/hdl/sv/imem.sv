@@ -7,7 +7,8 @@ module imem (
 
   initial
     $readmemh("memfile.dat", RAM);
-    assign rd = RAM[a[31:2]]; // word alligned
+    
+  assign rd = RAM[a[31:2]]; // word alligned
 
   // so cocotb will output the wave file in the tests directory
   `ifdef  COCOTB_SIM 

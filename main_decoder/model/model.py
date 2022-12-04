@@ -7,13 +7,13 @@ def model(Op: LogicArray, Funct: LogicArray, Rd: LogicArray):
     ALUOp = True
     FlagW = LogicArray(0, Range(1, 'downto', 0))
 
-#    print("Op debug", Op)
-#    print(Funct, Funct[0])
+    #need to change the range on the values of Funct to acces the highest bit and the lowest bit
+    Funct.range = Range(5, "downto", 0)
 
 
-    #Main decoder
+    #Main decoder, set controls to be assigned to their appropiate values
     if (Op.integer == 0):
-        if (int(Funct[5]) == 1):
+        if (int(Funct[5]) == 1): # could possibly change to -1 on Funct[-1]
             controls = LogicArray('0000101001')
         else:
             controls = LogicArray('0000001001')
@@ -29,15 +29,6 @@ def model(Op: LogicArray, Funct: LogicArray, Rd: LogicArray):
 
 
     #Output assignment
-    """RegSrc = controls[1:0]
-    ImmSrc = controls[3:2]
-    ALUSrc = controls[4]
-    MemtoReg = controls[5]
-    RegW = controls[6]
-    MemW = controls[7]
-    Branch = controls[8]
-    ALUOp = controls[9]
-    """
     RegSrc = controls[9:8]
     ImmSrc = controls[7:6]
     ALUSrc = controls[5]
@@ -46,11 +37,9 @@ def model(Op: LogicArray, Funct: LogicArray, Rd: LogicArray):
     MemW = controls[2]
     Branch = controls[1]
     ALUOp = controls[0]
-#    print("ALUOp debug:", ALUOp, controls)
-#    print("TEST", RegSrc,ImmSrc, ALUSrc, MemtoReg, RegW, MemW, Branch, ALUOp)
-    #ALU Decoder
+
+    # ALUControl setter, basically, add, sub, and, or
     if (ALUOp):
- #       print("Funct debug x2:", Funct, Funct[4:1])
         if(Funct[4:1].integer == 4):
            ALUControl = LogicArray('00')
         elif(Funct[4:1].integer == 2):
@@ -67,8 +56,7 @@ def model(Op: LogicArray, Funct: LogicArray, Rd: LogicArray):
     else:
         ALUControl = LogicArray('00')
         FlagW = LogicArray('00')
-
-#    print("PCS-->", Rd, RegW, Branch, Rd == LogicArray('1111'))
+    # branch check is here.
     PCS = ((Rd == LogicArray('1111') and RegW) or Branch)
     return { "FlagW":FlagW, "PCS":PCS, "RegW":RegW, "MemW":MemW, "MemtoReg":MemtoReg, "ALUSrc":ALUSrc, "ImmSrc":ImmSrc, "RegSrc":RegSrc, "ALUControl":ALUControl}
 

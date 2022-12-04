@@ -1,25 +1,30 @@
 from model import model
 
 import cocotb
-from cocotb.triggers import FallingEdge
+from cocotb.triggers import FallingEdge, Timer
 from cocotb.clock import Clock
+from cocotb.types import LogicArray, Logic, Range
 
 @cocotb.test()
 async def flopenr(dut):
-    clock = Clock(dut.clk, 10, units="us")
-    cocotb.start_soon(clock.start())
+    """Test that d propagates to q"""
 
-    count = 0
-    await FallingEdge(dut.clk)
-    for val in range(2**4):
+    clock = Clock(dut.clk, 10, units="us")  # Create a 10us period clock on port clk
+    cocotb.start_soon(clock.start())  # Start the clock
+
+    await FallingEdge(dut.clk)  # Synchronize with the clock
+    dut.reset.value = 1
+    state = 0
+    await FallingEdge(dut.clk)  # Synchronize with the clock
+    for val in range(2**2):
         for reset in range(2):
-            for en in range(2):
-                dut.d.value = val
-                dut.reset.value = reset
-                dut.en.value = en
+            if reset == 1:
+                state = 0
+            for enable in range(2):
+                dut.d.value = val  # Assign the random value val to the input port d
+                dut.reset.value = reset  # Assign the value for reset
+                dut.en.value = enable  # Assign the value for enable
                 await FallingEdge(dut.clk)
-                if reset:
-                   dut.q.value == 0, f"output q was incorrect on {count} cycle"
-                elif en:
-                   dut.q.value == val, f"output q was incorrect on {count} cycle"
-                count += 1
+                if enable == 1 and reset != 1:
+                    state = val
+                assert dut.q.value == state, f"HDL output {dut.q.value} vs {state}"
